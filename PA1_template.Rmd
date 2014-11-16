@@ -5,7 +5,7 @@ output:
     keep_md: true
 ---
 
-Peer assignment 2 
+Peer assignment 1 
 ===================
 
 This assignment is about analyzing the data from a fitbit.
