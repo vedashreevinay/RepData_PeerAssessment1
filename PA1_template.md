@@ -12,6 +12,7 @@ This assignment is about analyzing the data from a fitbit.
 
 ### Load data 
 
+
 ```r
 df <- read.csv("activity.csv")
 ```
@@ -157,7 +158,6 @@ names(weekday_steps)<- c("interval", "avg_steps")
 names(weekend_steps)<- c("interval", "avg_steps")
 
 plot(weekday_steps$interval, weekday_steps$avg_steps , type = "l", xlab = "Time interval", ylab = "Avg number of steps across week days", col = "green")
-par(mar=c(0,0,0,0))
 
 plot(weekend_steps$interval, weekend_steps$avg_steps , type = "l", xlab = "Time interval", ylab = "Avg number of steps across weekend days", col = "red")
 ```
