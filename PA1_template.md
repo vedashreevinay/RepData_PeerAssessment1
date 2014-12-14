@@ -5,7 +5,7 @@ output:
     keep_md: true
 ---
 
-Peer assignment 2 
+Peer assignment 1 
 ===================
 
 This assignment is about analyzing the data from a fitbit.
@@ -40,7 +40,7 @@ median <- median(total_steps$total.steps)
 
 ### Mean total number of steps each day is 9354.2295082 and median is 10395  
 
-### What is the average daily activity pattern?
+### 3. What is the average daily activity pattern?
 1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
 
@@ -69,7 +69,7 @@ maxInterval<- max_interval_df[[1]]
 ```
 Max number of steps across all days is during 835th interval.
 
-### Imputing missing values
+### 4. Imputing missing values
 
 Note that there are a number of days/intervals where there are missing values (coded as NA). The presence of missing days may introduce bias into some calculations or summaries of the data.
 
@@ -123,7 +123,7 @@ Calculate and report the mean and median total number of steps taken per day.
 mean<- mean(total_steps$steps)
 median <- median(total_steps$steps)
 ```
-### . Mean total number of steps each day is 9503.8688525 and median is 10395.
+###  Mean total number of steps each day is 9503.8688525 and median is 10395.
 
 What is the impact of imputing missing data on the estimates of the total daily number of steps?  
 - Mean value differes slightly but median is the same since we used the median value for imputing missing values.  
@@ -156,14 +156,10 @@ weekend_steps <- with(weekend_days, aggregate(steps.x, by = list(interval), mean
 names(weekday_steps)<- c("interval", "avg_steps")
 names(weekend_steps)<- c("interval", "avg_steps")
 
+plot(weekday_steps$interval, weekday_steps$avg_steps , type = "l", xlab = "Time interval", ylab = "Avg number of steps across week days", col = "green")
+par(mar=c(0,0,0,0))
 
-qplot(interval, avg_steps , geom = "line", data = weekday_steps, xlab = "Time interval", ylab = "Avg number of steps across week days")
+plot(weekend_steps$interval, weekend_steps$avg_steps , type = "l", xlab = "Time interval", ylab = "Avg number of steps across weekend days", col = "red")
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png) 
-
-```r
-qplot(interval, avg_steps , geom = "line", data = weekend_steps, xlab = "Time interval", ylab = "Avg number of steps across weekend days")
-```
-
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-2.png) 
+![plot of chunk multiple_plots](figure/multiple_plots-1.png) 

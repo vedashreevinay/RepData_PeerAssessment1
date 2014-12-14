@@ -11,6 +11,7 @@ Peer assignment 1
 This assignment is about analyzing the data from a fitbit.
 
 ### Load data 
+
 ```{r, echo = TRUE, results ='hide'}
 df <- read.csv("activity.csv")
 ```
@@ -34,10 +35,10 @@ median <- median(total_steps$total.steps)
 
 ### Mean total number of steps each day is `r mean` and median is `r median`  
 
-### What is the average daily activity pattern?
+### 3. What is the average daily activity pattern?
 1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
-```{r Mean steps}
+```{r Mean steps, fig.width = 8, fig.height = 5}
 library(ggplot2)
 mean_steps <- with(df, aggregate(steps, by = list(interval), mean, na.rm = TRUE))
 names(mean_steps)<- c("interval", "steps")
@@ -52,7 +53,7 @@ maxInterval<- max_interval_df[[1]]
 ```
 Max number of steps across all days is during `r maxInterval`th interval.
 
-### Imputing missing values
+### 4. Imputing missing values
 
 Note that there are a number of days/intervals where there are missing values (coded as NA). The presence of missing days may introduce bias into some calculations or summaries of the data.
 
@@ -99,7 +100,7 @@ Calculate and report the mean and median total number of steps taken per day.
 mean<- mean(total_steps$steps)
 median <- median(total_steps$steps)
 ```
-### . Mean total number of steps each day is `r mean` and median is `r median`.
+###  Mean total number of steps each day is `r mean` and median is `r median`.
 
 What is the impact of imputing missing data on the estimates of the total daily number of steps?  
 - Mean value differes slightly but median is the same since we used the median value for imputing missing values.  
@@ -118,7 +119,7 @@ mergeddf$day <- weekdays(as.Date(mergeddf$date))
 
 2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). 
 
-```{r}
+```{r multiple_plots, fig.width=8, fig.height=10, fig.show='hold'}
 par(mfrow=c(2,1))
 
 week_days <- subset(mergeddf, mergeddf$day %in% c("Monday","Tuesday","Wednesday","Thursday","Friday"))
@@ -130,7 +131,8 @@ weekend_steps <- with(weekend_days, aggregate(steps.x, by = list(interval), mean
 names(weekday_steps)<- c("interval", "avg_steps")
 names(weekend_steps)<- c("interval", "avg_steps")
 
+plot(weekday_steps$interval, weekday_steps$avg_steps , type = "l", xlab = "Time interval", ylab = "Avg number of steps across week days", col = "green")
+par(mar=c(0,0,0,0))
 
-qplot(interval, avg_steps , geom = "line", data = weekday_steps, xlab = "Time interval", ylab = "Avg number of steps across week days")
-qplot(interval, avg_steps , geom = "line", data = weekend_steps, xlab = "Time interval", ylab = "Avg number of steps across weekend days")
+plot(weekend_steps$interval, weekend_steps$avg_steps , type = "l", xlab = "Time interval", ylab = "Avg number of steps across weekend days", col = "red")
 ```
